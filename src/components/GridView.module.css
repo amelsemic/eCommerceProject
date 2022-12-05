@@ -1,0 +1,9 @@
+.productsContainer {
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+.productsContainer img {
+    height: 175px;
+  }
