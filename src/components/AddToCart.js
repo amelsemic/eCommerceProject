@@ -1,14 +1,58 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { FaCheck } from 'react-icons/fa'
-import { useCartContext } from '../context/cart_context'
-import AmountButtons from './AmountButtons'
+import React, { useState } from "react";
+import classes from "./AddToCart.module.css";
+import { Link } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
+import AmountButtons from "./AmountButtons";
 
-const AddToCart = () => {
-  return <h4>addToCart </h4>
-}
+const AddToCart = (props) => {
+  let colors = props.product.colors;
+  const [pickedColor, setPickedColor] = useState(props.product.colors[0]);
+  const [quantity, setQuantity] = useState(1);
 
+  const chooseColorHandler = (e) => {
+    setPickedColor(e.target.dataset.value);
+  };
+
+  let quantityHandler = (e) => {
+   /* USLOV DA NE BUDE KOLICINA MANJA OD NULE */
+
+    if(e.currentTarget.dataset.incr == "true") setQuantity(prev => prev+1)
+    else setQuantity(prev => prev-1)
+  };
+
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.colors}>
+        <span>Colors:</span>
+        {colors.map((c, index) => {
+          return (
+            <button
+              onClick={chooseColorHandler}
+              className={classes.btnColors}
+              data-value={c}
+              key={index}
+              name="color"
+              style={{ background: `${c}` }}
+            >
+              {c == pickedColor ? <FaCheck /> : null}
+            </button>
+          );
+        })}
+      </div>
+      <div className={classes.quantity}>
+        <button onClick={quantityHandler} data-incr={false}>
+          <span className={classes.btnSpan}>-</span>
+        </button>
+        <span className={classes.numSpan}> {quantity} </span>
+        <button onClick={quantityHandler} data-incr={true}>
+          <span className={classes.btnSpan}>+</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+/* 
 const Wrapper = styled.section`
   margin-top: 2rem;
   .colors {
@@ -53,5 +97,5 @@ const Wrapper = styled.section`
     margin-top: 1rem;
     width: 140px;
   }
-`
-export default AddToCart
+`; */
+export default AddToCart;

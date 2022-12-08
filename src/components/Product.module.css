@@ -1,26 +1,31 @@
 .wrapper{
   max-width: 400px;
 }
+.wrapperListing {
+  display: flex;
+}
 
 .wrapperListing img {
-  width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   height: 200px;
   object-fit: cover;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+  margin-right: 0.75rem;
 }
 
 .visual {
-padding: 0;
-
+position: relative;
+}
+.visual:hover img {
+  opacity: 0.5;
 }
 
 img {
     width: 100%;
     object-fit: cover;
     border-radius: 5px;
-    
-    
 }
 
 footer {
@@ -39,19 +44,43 @@ footer {
     color: hsl(22, 31%, 52%);
     letter-spacing: 0.1rem;
   }
-/* .container {
-    position: relative;
-    background: var(--clr-black);
-    border-radius: var(--radius);
-  }
-  img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    border-radius: var(--radius);
-    transition: var(--transition);
-  }
+
+
   .link {
+    position: absolute;
+    margin-top: 10px;
+    border-radius: 20%;
+    cursor: pointer;
+    background-color: hsl(22, 31%, 52%);
+    font-weight: 400;
+    border-color: transparent;
+    color: white;
+    padding: 5px;
+  }
+
+
+
+  .gridLink {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    opacity: 0;
+  }
+
+  .visual:hover .gridLink {
+    opacity: 1;
+  }
+
+  .gridLink svg {
+    width: 50px;
+    height: auto;
+   /*  background-color: aqua; */
+  }
+
+
+/*.link {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -71,6 +100,20 @@ footer {
       color: var(--clr-white);
     }
   }
+
+.container {
+    position: relative;
+    background: var(--clr-black);
+    border-radius: var(--radius);
+  }
+  img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--radius);
+    transition: var(--transition);
+  }
+  
   .container:hover img {
     opacity: 0.5;
   }

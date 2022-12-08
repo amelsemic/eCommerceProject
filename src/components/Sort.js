@@ -36,10 +36,10 @@ const {filtered_products, grid_view, setGridView, setListView, sort, sortProduct
           className='sortInput'
           onChange={sortProducts}
         >
-          <option value='price-lowest'>price (lowest)</option>
-          <option value='price-highest'>price (highest)</option>
           <option value='name-a'>name (a-z)</option>
           <option value='name-z'>name (z-a)</option>
+          <option value='price-lowest'>price (lowest)</option>
+          <option value='price-highest'>price (highest)</option>
         </select>
       </form>
 

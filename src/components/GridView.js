@@ -19,9 +19,10 @@ const GridView = () => {
 
   if(!products_loading && filtered_products?.length>0)
   {
+    console.log(filtered_products[0])
     return <div className={classes.productsContainer} >
     {filtered_products.map((product)=>{
-      return <Product view="grid" key={product.id} {...product} />
+      return <Product view="grid"  {...product} key={product.id} />
     })}
   </div>
   }

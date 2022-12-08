@@ -1,0 +1,20 @@
+.wrapper {
+  height: 5rem;
+  display: flex;
+ /*  flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.808);
+/*   bottom: 0; */
+}
+.wrapper span {
+  color: rgb(180, 51, 170);
+}
+.wrapper h5 {
+  color: white;
+  margin: 0.1rem;
+  font-weight: 600;
+  text-transform: none;
+  line-height: 1.25;
+}

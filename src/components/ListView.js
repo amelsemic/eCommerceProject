@@ -19,8 +19,6 @@ const ListView = () => {
   const { products_loading} = useContext(ProductsContext)
   const {filtered_products} = useContext(FilterContext)
 
-  const products = ctx.products;
-
   if(products_loading) return <Loading />
 
   if(!products_loading && filtered_products?.length>0)

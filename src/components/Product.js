@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import classes from "./Product.module.css";
 
 const Product = (props) => {
-
   if (props.view == "grid")
     return (
       <div className={classes.wrapper}>
         <div className={classes.visual}>
           <img src={props.image} alt={props.name} />
-          {/* Link to SingleProductPage */}
+            <Link to={`/products/${props.id}`}  className={classes.gridLink}>
+              <FaSearch />
+            </Link>
         </div>
         <footer>
           <h5>{props.name} </h5>
@@ -25,18 +26,18 @@ const Product = (props) => {
     return (
       <article className={classes.wrapperListing}>
         <img src={props.image} alt={props.name} />
-        <div className={classes.infoListing} >
+        <div className={classes.infoListing}>
           <h4>{props.name}</h4>
-          <h5 className={classes.priceListing} >{formatPrice(props.price)}</h5>
+          <h5 className={classes.priceListing}>{formatPrice(props.price)}</h5>
           <p>{props.description.substring(0, 150)}...</p>
-{/*           <Link to={`/products/${id}`} className="btn">
+          <Link to={`/products/${props.id}`} className={classes.link}>
             Details
-          </Link> */}
+          </Link>
         </div>
       </article>
     );
 };
-
+/* 
 const Wrapper = styled.article`
   .container {
     position: relative;
@@ -73,9 +74,9 @@ const Wrapper = styled.article`
   .container:hover img {
     opacity: 0.5;
   }
-  .container:hover .link {
-    opacity: 1;
-  }
+ /*  .container:hover .link {
+    opacity: 0;
+  } 
   footer {
     margin-top: 1rem;
     display: flex;
@@ -92,5 +93,5 @@ const Wrapper = styled.article`
     color: var(--clr-primary-5);
     letter-spacing: var(--spacing);
   }
-`;
+`; */
 export default Product;
