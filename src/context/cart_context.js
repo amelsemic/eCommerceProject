@@ -17,7 +17,7 @@ const getLocalStorage = () => {
   }
 };
 
-const initialState = {
+export const initialState = {
   cart: getLocalStorage(),
   total_items: 0,
   total_amount: 0,
@@ -27,6 +27,7 @@ const initialState = {
 export const CartContext = React.createContext();
 
 export const CartProvider = (props) => {
+
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state);
   /*   useEffect(()=>{}, state.cart) */
@@ -52,10 +53,15 @@ export const CartProvider = (props) => {
     dispatch({ type: REMOVE_CART_ITEM, id: id });
   };
 
+  const clearCartHandler = () => {
+    dispatch({type: CLEAR_CART})
+  }
+
   const ctxValue = {
     ...state,
     addItemToCartHandler,
     removeItemFromCartHandler,
+    clearCartHandler
   };
   return (
     <CartContext.Provider value={ctxValue}>

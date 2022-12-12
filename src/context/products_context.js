@@ -31,7 +31,7 @@ const ProductsProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const fetchProducts = async () =>{
-    console.log("fetching.....")
+
     dispatch({type: GET_PRODUCTS_BEGIN})
     try {
       const res = await fetch(url);

@@ -6,27 +6,32 @@ import { useCartContext } from "../context/cart_context";
 import AmountButtons from "./AmountButtons";
 import { CartContext } from "../context/cart_context";
 
-
 const AddToCart = (props) => {
   let colors = props.product.colors;
   const [pickedColor, setPickedColor] = useState(props.product.colors[0]);
   const [quantity, setQuantity] = useState(1);
-  const ctxValue = useContext(CartContext)
+  const ctxValue = useContext(CartContext);
 
   const chooseColorHandler = (e) => {
     setPickedColor(e.target.dataset.value);
   };
 
   const quantityHandler = (e) => {
-    if(e.currentTarget.dataset.incr === "true" && props.product.stock>quantity) setQuantity(prev => prev+1)
+    if (
+      e.currentTarget.dataset.incr === "true" &&
+      props.product.stock > quantity
+    )
+      setQuantity((prev) => prev + 1);
     else if (e.currentTarget.dataset.incr === "false") {
-      if(quantity>1) setQuantity(prev => prev-1)}
+      if (quantity > 1) setQuantity((prev) => prev - 1);
+    }
   };
 
   const addToCartHandler = () => {
-    ctxValue.addItemToCartHandler({...props.product, quantity,pickedColor})
-  }
+    ctxValue.addItemToCartHandler({ ...props.product, quantity, pickedColor });
+  };
 
+  let cursor = quantity >= props.product.stock ? "not-allowed" : "pointer";
   return (
     <div className={classes.wrapper}>
       <div className={classes.colors}>
@@ -54,9 +59,19 @@ const AddToCart = (props) => {
         <button onClick={quantityHandler} data-incr={true}>
           <span className={classes.btnSpan}>+</span>
         </button>
-        {(quantity == props.product.stock) ? <span className={classes.noMoreSpan} >No more in stock!</span> : null}
+        {quantity >= props.product.stock ? (
+          <span className={classes.noMoreSpan}>No more in stock!</span>
+        ) : null}
       </div>
-      <Link onClick={addToCartHandler} className={classes.btn} >Add to Cart</Link>
+{/*       {quantity < props.product.stock ? ( */}
+        <Link onClick={addToCartHandler} className={classes.btn}>
+          Add to Cart
+        </Link>
+{/*       ) : (
+        <Link className={classes.btnDisabled}>
+          Add to Cart
+        </Link>
+      )} */ }
     </div>
   );
 };
