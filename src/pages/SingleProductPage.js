@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { single_product_url } from "../utils/constants";
@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 const SingleProductPage = () => {
   const [productInfo, setProductInfo] = useState({});
   const [bigPicInd, setBigPicInd] = useState(0);
+  
   const id = useParams().id;
 
   useEffect(() => {
@@ -39,9 +40,9 @@ const SingleProductPage = () => {
   if (Object.keys(productInfo).length === 0) return <Loading />;
   return (
     <>
-      <Link to={"/products"}>
-        <button>Back to products</button>
-      </Link>
+      {/* <Link to={"/products"} className={classes.btn} >
+        Back to products
+      </Link> */}
       <div className={classes.wrapper}>
         {/*        <div className={classes.visual}> */}
         <div className={classes.pics}>
@@ -75,6 +76,7 @@ const SingleProductPage = () => {
             {productInfo.company}
           </p>
           <hr />
+          {/* dodati animaciju kad se klikne na add to cart */}
           {productInfo.stock > 0 && <AddToCart product={productInfo} />}
         </section>
       </div>

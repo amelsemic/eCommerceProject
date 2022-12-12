@@ -1,24 +1,37 @@
-.navBar{
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navCenter {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: 1170px;
-}
-.navHeader {
+.navBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  background-color: aqua;
+  width: 100%;
+  height: 4.5rem;
 }
-.navHeader img {
-    width: 175px;
-    margin-left: -15px;
+
+.navBar img {
+  width: 175px;
+  margin-left: -15px;
 }
+.cart {
+  font-size: 2rem;
+  position: relative;
+  cursor: pointer;
+}
+.quantity {
+  font-size: 17px;
+  font-weight: 800;
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 17px;
+  background-color: brown;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+
 .navToggle {
   background: transparent;
   border: transparent;
@@ -26,10 +39,10 @@
   cursor: pointer;
 }
 .navToggle svg {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
-.navLinks {
+/* .navLinks {
   display: none;
 }
 .cartBtnWrapper {
@@ -64,4 +77,4 @@
   .cartBtnWrapper {
     display: grid;
   }
-}
+} */

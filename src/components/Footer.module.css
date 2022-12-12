@@ -1,15 +1,15 @@
 .wrapper {
   height: 5rem;
   display: flex;
- /*  flex-direction: column; */
   justify-content: center;
   align-items: center;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.808);
-/*   bottom: 0; */
 }
 .wrapper span {
-  color: rgb(180, 51, 170);
+  color: #928e89;
+  font-style: oblique;
+  font-size: 30px;
 }
 .wrapper h5 {
   color: white;

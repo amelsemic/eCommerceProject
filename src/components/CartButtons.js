@@ -1,15 +1,15 @@
 import React from 'react'
 import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import classes from "./CartButtons.module.css"
 import { useProductsContext } from '../context/products_context'
 import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 
 const CartButtons = () => {
-  return <h4>cart buttons </h4>
+  return <div className={classes.cart}><FaShoppingCart /> </div>
 }
-
+/* 
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -62,5 +62,5 @@ const Wrapper = styled.div`
       margin-left: 5px;
     }
   }
-`
+` */
 export default CartButtons

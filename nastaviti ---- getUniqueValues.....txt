@@ -1,0 +1,11 @@
+
+
+-- get unique values
+
+
+-- footer se pomakne gore kad otvorim console log
+
+
+
+
+-- navesti kao novi item ako dodajemo isti druge boje
