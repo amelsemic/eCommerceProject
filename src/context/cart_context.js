@@ -22,6 +22,7 @@ export const initialState = {
   total_items: 0,
   total_amount: 0,
   shipping_fee: 0,
+  new_order: false,
 };
 
 export const CartContext = React.createContext();

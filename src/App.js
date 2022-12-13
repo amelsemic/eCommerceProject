@@ -10,9 +10,12 @@ import SingleProductPage from "./pages/SingleProductPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ErrorPage from "./pages/ErrorPage";
 import CartContent from "./components/CartContent";
+import Orders from "./components/Orders";
 
 function App() {
   const [showCart, setShowCart] = useState(false)
+  const [showOrders, setShowOrders] = useState(false)
+  const [numOfOrders, setNumOfOrders] = useState(0)
 
   const hideCartHandler = () =>{
     setShowCart(false)
@@ -20,12 +23,21 @@ function App() {
   const showCartHandler = () =>{
     setShowCart(true)
   }
+  const hideOrdersHandler = () =>{
+    setShowOrders(false)
+  }
+  const showOrdersHandler = () =>{
+    setShowOrders(true)
+  }
+  const ordersNumHandler = (num) =>{
+    setNumOfOrders(num)
+  }
 
   return (
     <div className={classes.app}>
-      <Navbar onShowCart={showCartHandler} />
-      {showCart && <CartContent onClose={hideCartHandler} />}
-
+      <Navbar onShowCart={showCartHandler} onShowOrders={showOrdersHandler} />
+      {showCart && <CartContent onClose={hideCartHandler}  />}
+      {showOrders && <Orders onClose={hideOrdersHandler} /> }
       {/* <Sidebar />  */}
       <Switch>
         <Route exact path="/">

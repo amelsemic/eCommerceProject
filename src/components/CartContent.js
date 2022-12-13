@@ -13,7 +13,7 @@ import Checkout from './Checkout'
 
 
 const CartContent = (props) => {
-  const {total_amount, cart, addItemToCartHandler, removeItemFromCartHandler, clearCartHandler} = useContext (CartContext)
+  let {total_amount, cart, addItemToCartHandler, removeItemFromCartHandler, clearCartHandler, new_order} = useContext (CartContext)
   const hasItems = cart.length > 0;
   const [isCheckout, setIsCheckOut] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +45,7 @@ const CartContent = (props) => {
     setIsSubmitting(false);
     setDidSubmit(true);
     clearCartHandler();
+    new_order=true;
   };
 
   const cartItems = (

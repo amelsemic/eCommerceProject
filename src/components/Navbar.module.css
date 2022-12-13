@@ -14,10 +14,16 @@
   width: 175px;
   margin-left: -15px;
 }
-.cart {
-  font-size: 2rem;
+.icon {
   position: relative;
+}
+.icons {
+  font-size: 2rem;
+/*   position: relative; */
   cursor: pointer;
+  display: flex;
+  gap: 40px;
+  align-items: center;
 }
 .quantity {
   font-size: 17px;
@@ -40,6 +46,40 @@
 }
 .navToggle svg {
   font-size: 2rem;
+}
+.shipInfo {
+  font-size: small;
+  position: absolute;
+  top: 2.5rem;
+  left: 0.5rem;
+  background-color: rgba(128, 128, 128, 0.603);
+  border-radius: 20%;
+  width: 5rem;
+  text-align: center;
+  visibility: hidden;
+}
+.shipping:hover .shipInfo {
+  visibility: visible;
+}
+.bump {
+  animation: bump 300ms ease-out;
+}
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* .navLinks {

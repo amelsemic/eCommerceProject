@@ -40,11 +40,7 @@ const SingleProductPage = () => {
   if (Object.keys(productInfo).length === 0) return <Loading />;
   return (
     <>
-      {/* <Link to={"/products"} className={classes.btn} >
-        Back to products
-      </Link> */}
       <div className={classes.wrapper}>
-        {/*        <div className={classes.visual}> */}
         <div className={classes.pics}>
           <img src={productInfo.images[bigPicInd].url} alt="no pic" />
           <div className={classes.smallPics}>
@@ -57,7 +53,6 @@ const SingleProductPage = () => {
             ))}
           </div>
         </div>
-        {/*         </div> */}
         <section className={classes.content}>
           <h2>{productInfo.name}</h2>
           <Stars stars={productInfo.stars} reviews={productInfo.reviews} />
