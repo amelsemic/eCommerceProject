@@ -5,30 +5,12 @@ import { FaCheck } from "react-icons/fa";
 import { FilterContext } from "../context/filter_context";
 import { useContext } from "react";
 
-const categories = [
-  "office",
-  "living room",
-  "kitchen",
-  "bedroom",
-  "dining",
-  "kids",
-];
-const companies = ["marcos", "liddy", "ikea"];
-const colors = ["#ff0000","#00ff00","#0000ff"]
-
-
-
-/* KASNIJE URADITI OVO
-const categories = getUniqueValues(all_products, 'category')
-const companies = getUniqueValues(all_products, 'company')
-const colors = getUniqueValues(all_products, 'colors') */
-
 const Filters = () => {
   const {
+    all_products,
     updateFilters,
     clearFilters,
     filters: {
-      text,
       company,
       category,
       color,
@@ -39,24 +21,29 @@ const Filters = () => {
     },
   } = useContext(FilterContext);
 
+  const categories = getUniqueValues(all_products, 'category')
+  const companies = getUniqueValues(all_products, 'company')
+  const colors = getUniqueValues(all_products, 'colors')
+
   return (
     <div className={classes.filters}>
       <form onSubmit={(e) => e.preventDefault()}>
-        <div /* className={classes.form} */>
+        <div>
           <input
             type="text"
             name="text"
             placeholder="search"
             className="search-input"
-            /* value={text} */
             onChange={updateFilters}
           />
         </div>
 
         <div className={classes.form}>
-          <h5>category</h5>
+          <h3>category</h3>
           <div className={classes.category} >
-            <button key="99" onClick={updateFilters} type="button" name="category">
+            <button key="99" onClick={updateFilters} type="button" name="category" className={`${
+                    category === "all" ? classes.active : null
+                  }`} >
               all
             </button>
             {categories.map((c, index) => {
@@ -66,9 +53,9 @@ const Filters = () => {
                   onClick={updateFilters}
                   type="button"
                   name="category"
-                  /* className={`${
-                    category === c.toLowerCase() ? "active" : null
-                  }`} */
+                  className={`${
+                    category === c.toLowerCase() ? classes.active : null
+                  }`}
                 >
                   {c}
                 </button>
@@ -78,12 +65,11 @@ const Filters = () => {
         </div>
 
         <div className={classes.form}>
-          <h5>company</h5>
+          <h3>company</h3>
           <select
             name="company"
             value={company} 
             onChange={updateFilters}
-            /* className="company" */
           >
             <option key="99" value={"all"}>
               all
@@ -99,50 +85,17 @@ const Filters = () => {
         </div>
 
         <div className={classes.form}>
-          <h5>colors</h5>
+          <h3>colors</h3>
           <div className={classes.colors}>
             <button name="color" data-value="all" className={classes.btnColorsAll} onClick={updateFilters} >All</button>
             {colors.map((c,index)=>{
-            
-              return <button onClick={updateFilters} className={classes.btnColors} data-value={c} key={index} name="color" style={{ "background": `${c}` }} >{color == c ? <FaCheck /> : null }  </button>
-            
+              return <button onClick={updateFilters} className={classes.btnColors} data-value={c} key={index} name="color" style={{ "background": `${c}` }} >{color === c ? <FaCheck /> : null }  </button>
             })}
-            {/* {colors.map((c, index) => {
-              if (c === "all") {
-                return (
-                  <button
-                    key={index}
-                    name="color"
-                    onClick={updateFilters}
-                    data-color="all"
-                    className={`${
-                      color === "all" ? "all-btn active" : "all-btn"
-                    }`}
-                  >
-                    all
-                  </button>
-                );
-              }
-              return (
-                <button
-                  key={index}
-                  name="color"
-                  style={{ background: c }}
-                  className={`${
-                    color === c ? "color-btn active" : "color-btn"
-                  }`}
-                  data-color={c}
-                  onClick={updateFilters}
-                >
-                  {color === c ? <FaCheck /> : null}
-                </button>
-              );
-            })} */}
           </div>
         </div>
 
         <div className={classes.form}>
-          <h5>price</h5>
+          <h3>price</h3>
           <p className="price">{formatPrice(price)} $</p>
           <input
             type="range"
@@ -163,8 +116,7 @@ const Filters = () => {
             checked={shipping} 
           />
         </div>
-        <button type="button" /* className='clear-btn' */ onClick={clearFilters}>
-          {" "}
+        <button type="button" className={classes.clearBtn}  onClick={clearFilters}>
           clear filters
         </button>
       </form>

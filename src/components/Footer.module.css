@@ -1,20 +1,21 @@
 .wrapper {
-  height: 5rem;
+  height: 4.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.808);
+  background-color: rgb(238,238,228);
+  border-style: ridge none;
 }
 .wrapper span {
-  color: #928e89;
-  font-style: oblique;
-  font-size: 30px;
+  color: #55514c;
+  font-style: italic;
+  font-size: 25px;
+  height: 3rem;
 }
 .wrapper h5 {
-  color: white;
+  color: black;
+  font-size: 20px;
   margin: 0.1rem;
-  font-weight: 600;
-  text-transform: none;
-  line-height: 1.25;
+  height: 3rem;
+  transform: translateY(0.5rem);
 }

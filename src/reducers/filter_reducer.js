@@ -1,9 +1,7 @@
-import { act } from "react-dom/test-utils";
 import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
   SET_GRIDVIEW,
-  UPDATE_SORT,
   SORT_PRODUCTS,
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
@@ -11,7 +9,7 @@ import {
 } from "../actions";
 
 const filter_reducer = (state, action) => {
-  if (action.type == LOAD_PRODUCTS) {
+  if (action.type === LOAD_PRODUCTS) {
     let prices = action.payload.map((p) => p.price);
     let max_price = Math.max(...prices);
     let min_price = Math.min(...prices);
@@ -23,11 +21,11 @@ const filter_reducer = (state, action) => {
       filters: { ...state.filters, max_price, min_price, price: max_price },
     };
   }
-  if (action.type == UPDATE_FILTERS) {
+  if (action.type === UPDATE_FILTERS) {
     const { name, value } = action.payload;
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
-  if (action.type == CLEAR_FILTERS) {
+  if (action.type === CLEAR_FILTERS) {
     return {
       ...state,
       filters: {
@@ -41,13 +39,13 @@ const filter_reducer = (state, action) => {
       },
     };
   }
-  if (action.type == SET_GRIDVIEW) {
+  if (action.type === SET_GRIDVIEW) {
     return { ...state, grid_view: true };
   }
-  if (action.type == SET_LISTVIEW) {
+  if (action.type === SET_LISTVIEW) {
     return { ...state, grid_view: false };
   }
-  if (action.type == FILTER_PRODUCTS) {
+  if (action.type === FILTER_PRODUCTS) {
     let filtered_products = state.all_products.filter((product) => {
       let searchInputFilter =
         product.name.includes(state.filters.text) || state.filters.text === "";
@@ -76,7 +74,7 @@ const filter_reducer = (state, action) => {
 
     return { ...state, filtered_products };
   }
-  if (action.type == SORT_PRODUCTS) {
+  if (action.type === SORT_PRODUCTS) {
     let filtered_products = state.filtered_products;
     if (action.payload === "price-lowest") {
       filtered_products.sort((a, b) => {
@@ -106,7 +104,7 @@ const filter_reducer = (state, action) => {
   }
 
   return state;
-  throw new Error(`No Matching "${action.type}" - action type`);
+
 };
 
 export default filter_reducer;

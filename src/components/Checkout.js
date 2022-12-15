@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
-/* import CartContext from "../../store/cart-context"; */
 
 const isEmpty = (value) => value.trim().length === 0;
 const isFiveChars = (value) => value.length === 5;
 
 const Checkout = (props) => {
-  /* const ctx = useContext(CartContext); */
 
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,

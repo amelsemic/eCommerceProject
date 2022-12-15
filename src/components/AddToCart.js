@@ -2,8 +2,6 @@ import React, { useState, useContext } from "react";
 import classes from "./AddToCart.module.css";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
-import { useCartContext } from "../context/cart_context";
-import AmountButtons from "./AmountButtons";
 import { CartContext } from "../context/cart_context";
 
 const AddToCart = (props) => {
@@ -31,7 +29,6 @@ const AddToCart = (props) => {
     ctxValue.addItemToCartHandler({ ...props.product, quantity, pickedColor });
   };
 
-  let cursor = quantity >= props.product.stock ? "not-allowed" : "pointer";
   return (
     <div className={classes.wrapper}>
       <div className={classes.colors}>
@@ -46,7 +43,7 @@ const AddToCart = (props) => {
               name="color"
               style={{ background: `${c}` }}
             >
-              {c == pickedColor ? <FaCheck /> : null}
+              {c === pickedColor ? <FaCheck /> : null}
             </button>
           );
         })}
@@ -63,62 +60,11 @@ const AddToCart = (props) => {
           <span className={classes.noMoreSpan}>No more in stock!</span>
         ) : null}
       </div>
-{/*       {quantity < props.product.stock ? ( */}
-        <Link onClick={addToCartHandler} className={classes.btn}>
-          Add to Cart
-        </Link>
-{/*       ) : (
-        <Link className={classes.btnDisabled}>
-          Add to Cart
-        </Link>
-      )} */ }
+      <Link onClick={addToCartHandler} className={classes.btn}>
+        Add to Cart
+      </Link>
     </div>
   );
 };
-/* 
-const Wrapper = styled.section`
-  margin-top: 2rem;
-  .colors {
-    display: grid;
-    grid-template-columns: 125px 1fr;
-    align-items: center;
-    margin-bottom: 1rem;
-    span {
-      text-transform: capitalize;
-      font-weight: 700;
-    }
-    div {
-      display: flex;
-    }
-  }
-  .color-btn {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: #222;
-    margin-right: 0.5rem;
-    border: none;
-    cursor: pointer;
-    opacity: 0.5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      font-size: 0.75rem;
-      color: var(--clr-white);
-    }
-  }
-  .active {
-    opacity: 1;
-  }
-  .btn-container {
-    margin-top: 2rem;
-  }
 
-  .btn {
-    margin-top: 1rem;
-    width: 140px;
-  }
-`; */
 export default AddToCart;

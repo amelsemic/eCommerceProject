@@ -1,43 +1,40 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { useProductsContext } from "../context/products_context";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { single_product_url } from "../utils/constants";
 import { formatPrice } from "../utils/helpers";
 import classes from "./SingleProductPage.module.css";
+import ErrorPage from "./ErrorPage";
+import Stars from "../components/Stars";
+import AddToCart from "../components/AddToCart";
+import Loading from "../components/Loading";
 
-import {
-  Loading,
-  Error,
-  ProductImages,
-  AddToCart,
-  Stars,
-  PageHero,
-} from "../components";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const SingleProductPage = () => {
   const [productInfo, setProductInfo] = useState({});
   const [bigPicInd, setBigPicInd] = useState(0);
-  
+  const [error, setError] = useState(false);
+
   const id = useParams().id;
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      console.log(`${single_product_url}${id}`);
-      let res = await fetch(`${single_product_url}${id}`);
-      let data = await res.json();
-      setProductInfo(data);
-    };
-    fetchProducts();
+    try {
+      const fetchProducts = async () => {
+        let res = await fetch(`${single_product_url}${id}`);
+        if (!res.ok) setError(true);
+        let data = await res.json();
+        setProductInfo(data);
+      };
+      fetchProducts();
+    } catch (err) {
+      console.error("no product");
+    }
   }, [id]);
 
   const changeBigPicHandler = (e) => {
-    console.log(e.target.dataset.index);
     setBigPicInd(e.target.dataset.index);
   };
-
-  if (Object.keys(productInfo).length === 0) return <Loading />;
+if(error) return <ErrorPage />
+  if (Object.keys(productInfo).length === 0 && !error) return <Loading />;
   return (
     <>
       <div className={classes.wrapper}>
@@ -46,6 +43,7 @@ const SingleProductPage = () => {
           <div className={classes.smallPics}>
             {productInfo.images.map((img, ind) => (
               <img
+              alt="noImg"
                 src={img.url}
                 data-index={ind}
                 onClick={changeBigPicHandler}
@@ -71,46 +69,11 @@ const SingleProductPage = () => {
             {productInfo.company}
           </p>
           <hr />
-          {/* dodati animaciju kad se klikne na add to cart */}
           {productInfo.stock > 0 && <AddToCart product={productInfo} />}
         </section>
       </div>
     </>
   );
 };
-
-/* const Wrapper = styled.main`
-  .product-center {
-    display: grid;
-    gap: 4rem;
-    margin-top: 2rem;
-  }
-  .price {
-    color: var(--clr-primary-5);
-  }
-  .desc {
-    line-height: 2;
-    max-width: 45em;
-  }
-  .info {
-    text-transform: capitalize;
-    width: 300px;
-    display: grid;
-    grid-template-columns: 125px 1fr;
-    span {
-      font-weight: 700;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .product-center {
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-    }
-    .price {
-      font-size: 1.25rem;
-    }
-  }
-` */
 
 export default SingleProductPage;

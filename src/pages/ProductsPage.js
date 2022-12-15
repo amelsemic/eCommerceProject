@@ -1,6 +1,8 @@
 import React from 'react'
 import classes from "./ProductsPage.module.css"
-import { Filters, ProductList, Sort, PageHero } from '../components'
+import Filters from '../components/Filters'
+import ProductList from '../components/ProductList'
+import Sort from '../components/Sort'
 
 const ProductsPage = () => {
   return <div className={classes.products}>
@@ -11,6 +13,5 @@ const ProductsPage = () => {
     </div>
   </div>
 }
-
 
 export default ProductsPage

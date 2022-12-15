@@ -1,18 +1,9 @@
-
-
 .products {
     display: flex;
     margin: 2rem 1rem;
     justify-content: center;
+
   }
 .productsList {
-/*   position: absolute;
-    left: 15rem; */
     width: 70rem;
 }
-
-  /* @media (min-width: 768px) {
-    .products {
-      grid-template-columns: 200px 1fr;
-    }
-  } */

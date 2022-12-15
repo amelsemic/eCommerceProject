@@ -1,38 +1,32 @@
 import React, { useEffect, useReducer } from "react";
 
 function titleCase(str) {
-    var splitStr = str.toLowerCase().split(" ");
-  
-    for (var i = 0; i < splitStr.length; i++) {
-      if (splitStr.length[i] < splitStr.length) {
-        splitStr[i].charAt(0).toUpperCase();
-      }
-  
-      str = splitStr.join(" ");
+  var splitStr = str.toLowerCase().split(" ");
+
+  for (var i = 0; i < splitStr.length; i++) {
+    if (splitStr.length[i] < splitStr.length) {
+      splitStr[i].charAt(0).toUpperCase();
     }
-  
-    return str;
+
+    str = splitStr.join(" ");
   }
+
+  return str;
+}
 
 const initialState = {
   orders: [],
   reports: [],
   new_order: false,
 };
-/* 
-let window.classifier = new ColorClassifier();
-get_dataset('dataset.js', function (data){
-    window.classifier.learn(data);
-}); */
-/* var result_name = window.classifier.classify("#aaf000"); */
 
 export const OrdersContext = React.createContext();
 
 const reducerFn = (state, action) => {
-  if (action.type == "setOrders") {
-    return { ...state, orders: action.payload, new_order:false };
+  if (action.type === "setOrders") {
+    return { ...state, orders: action.payload, new_order: false };
   }
-  if (action.type == "makeReports") {
+  if (action.type === "makeReports") {
     let ordersReport = [];
     for (const order of state.orders) {
       let orderReport = "\n\n" + order.user.name + " ordered ";
@@ -69,7 +63,9 @@ const reducerFn = (state, action) => {
     }
     return { ...state, reports: ordersReport };
   }
-
+  if (action.type === "updateOrders") {
+    return { ...state, new_order: true };
+  }
 };
 
 export const OrdersProvider = (props) => {
@@ -105,12 +101,18 @@ export const OrdersProvider = (props) => {
     dispatch({ type: "makeReports" });
   }, [state.orders.length]);
 
-  console.log(state)
+  const updateOrders = () => {
+    dispatch({ type: "updateOrders" });
+  };
+
+  const ctxValue = {
+    ...state,
+    updateOrders,
+  };
 
   return (
-    <OrdersContext.Provider value={state}>
+    <OrdersContext.Provider value={ctxValue}>
       {props.children}
     </OrdersContext.Provider>
   );
 };
-

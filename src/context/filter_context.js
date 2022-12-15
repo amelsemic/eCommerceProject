@@ -4,7 +4,6 @@ import {
   LOAD_PRODUCTS,
   SET_GRIDVIEW,
   SET_LISTVIEW,
-  UPDATE_SORT,
   SORT_PRODUCTS,
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
@@ -32,23 +31,22 @@ const initialState = {
 export const FilterContext = React.createContext();
 
 export const FilterProvider = (props) => {
-  const {products} = useContext(ProductsContext);
+  const { products } = useContext(ProductsContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-
 
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
 
-  useEffect(()=>{
-    dispatch({type: FILTER_PRODUCTS})
-  }, [products, state.filters])
+  useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
+  }, [products, state.filters]);
 
   const updateFilters = (e) => {
     let name = e.target.name;
     let value;
-    if(name === "text"){
-      value=e.target.value;
+    if (name === "text") {
+      value = e.target.value;
     }
     if (name === "category") {
       value = e.target.textContent;
@@ -67,22 +65,31 @@ export const FilterProvider = (props) => {
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
-  const clearFilters = () =>{
-    dispatch({type: CLEAR_FILTERS})
-  }
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
   const setGridView = () => {
-    dispatch({type: SET_GRIDVIEW})
-  }
-  const setListView = () =>{
-    dispatch({type: SET_LISTVIEW})
-  }
-const sortProducts = (e) =>{
-  console.log(e.target.value)
-  dispatch({type: SORT_PRODUCTS, payload: e.target.value})
-}
+    dispatch({ type: SET_GRIDVIEW });
+  };
+  const setListView = () => {
+    dispatch({ type: SET_LISTVIEW });
+  };
+  const sortProducts = (e) => {
+    console.log(e.target.value);
+    dispatch({ type: SORT_PRODUCTS, payload: e.target.value });
+  };
 
   return (
-    <FilterContext.Provider value={{ ...state, updateFilters, clearFilters,  setGridView, setListView, sortProducts }}>
+    <FilterContext.Provider
+      value={{
+        ...state,
+        updateFilters,
+        clearFilters,
+        setGridView,
+        setListView,
+        sortProducts,
+      }}
+    >
       {props.children}
     </FilterContext.Provider>
   );

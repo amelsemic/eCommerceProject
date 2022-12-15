@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import Modal from "./Modal";
 import { OrdersContext } from "../context/orders_context";
 
@@ -8,7 +8,7 @@ const Orders = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      <h1>previously oredered...</h1>
+      <h1>To be shipped...</h1>
       {reports.map((report) => (
         <>
           <span style={{ whiteSpace: "pre-wrap" }}>{report} </span>
